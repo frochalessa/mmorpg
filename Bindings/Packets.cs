@@ -10,7 +10,8 @@
     //server has to listen to clientpackets
     public enum ClientPackets
     {
-        CRegister = 1,
+        CAlertMsg = 1,
+        CRegister,
         CLogin,
     }
 }

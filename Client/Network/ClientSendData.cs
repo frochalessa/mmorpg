@@ -15,5 +15,15 @@ namespace Client
             ClientTcp.instance.SendData(buffer.ToArray());
             buffer.Dispose();
         }
+
+        public void SendRegister()
+        {
+            PacketBuffer buffer = new PacketBuffer();
+            buffer.WriteInteger((int)ClientPackets.CRegister);
+            buffer.WriteString(Globals.regUsername);
+            buffer.WriteString(Globals.regPassword);
+            ClientTcp.instance.SendData(buffer.ToArray());
+            buffer.Dispose();
+        }
     }
 }

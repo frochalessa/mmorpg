@@ -9,6 +9,7 @@
         public static string regUsername = "";
         public static string regPassword = "";
         public static string regRepeatPassword = "";
+        public static string name = "";
         //Game direction vars
         public static bool dirUp;
         public static bool dirDown;

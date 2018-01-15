@@ -100,16 +100,35 @@ namespace Client
             panel.AddChild(txtUser);
             panel.AddChild(header2);
             panel.AddChild(txtPass);
-            panel.AddChild(header3);
-            panel.AddChild(txtPassRepeat);
+            //panel.AddChild(header3);
+            //panel.AddChild(txtPassRepeat);
             panel.AddChild(btnRegister);
             panel.AddChild(btnBack);
 
             //on click events
+            btnRegister.OnClick += (Entity entity) =>
+            {
+                if (Globals.regUsername == string.Empty | Globals.regPassword == string.Empty)
+                {
+                    MessageBox.ShowMsgBox("No Input", "Please enter a valid username or password before trying to login!", new MessageBox.MsgBoxOption[]
+                    {
+                        new MessageBox.MsgBoxOption("Okay!" ,() => {return true; })
+                    });
+                }
+                else
+                {
+                    ClientSendData.instance.SendRegister();
+                }
+            };
+
             btnBack.OnClick += (Entity entity) =>
             {
                 MenuManager.ChangeMenu(MenuManager.Menu.Login);
             };
+
+            //TextBox events
+            txtUser.OnValueChange = (Entity textUser) => { Globals.regUsername = txtUser.Value; };
+            txtPass.OnValueChange = (Entity textPass) => { Globals.regPassword = txtPass.Value; };
 
             //create the window
             CreateWindow(panel);

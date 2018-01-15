@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using Bindings;
+using GeonBit.UI.Utils;
 
 namespace Client
 {
@@ -15,7 +17,7 @@ namespace Client
             _packets = new Dictionary<int, Packets>
             {
                 //Add your packets in here, so the client knows which methode to execute.
-                //{ (int)ServerPackets.SWelcomeMsg, HandleWelcomeMsg },
+                { (int)ServerPackets.SAlertMsg, HandleAlertMsg },
                 //{ (int)ServerPackets.SLoginOk, HandleLoginOk },
                 //{(int)ServerPackets.SPlayerData, HandlePlayerData },
 
@@ -32,6 +34,22 @@ namespace Client
             {
                 _packet.Invoke(data);
             }
+        }
+
+        public void HandleAlertMsg(byte[] data)
+        {
+            PacketBuffer buffer = new PacketBuffer();
+            buffer.WriteBytes(data);
+            buffer.ReadInteger();
+            string msg = buffer.ReadString();
+
+            MessageBox.ShowMsgBox("Info!", msg, new MessageBox.MsgBoxOption[]
+                    {
+                        new MessageBox.MsgBoxOption("Okay!" ,() => {return true; })
+                    });
+
+            Debug.WriteLine(msg);
+            buffer.Dispose();
         }
     }
 }

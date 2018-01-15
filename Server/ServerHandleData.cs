@@ -45,13 +45,15 @@ namespace Server
 
             if (!Database.instance.AccountExist(username))
             {
-                Database.instance.AddAccount(index, username, password);
+                //Database.instance.AddAccount(index, username, password);
                 Console.WriteLine("Username does not exist.");
+                ServerSendData.instance.SendAlertMsg(index, "Username does not exist");
                 return;
             }
             if (!Database.instance.PasswordOk(index, username, password))
             {
                 Console.WriteLine("Password is wrong.");
+                ServerSendData.instance.SendAlertMsg(index, "Password is wrong.");
                 return;
             }
             Console.WriteLine("Player logged in succesfully.");
@@ -69,10 +71,14 @@ namespace Server
             if (!Database.instance.AccountExist(username))
             {
                 Database.instance.AddAccount(index, username, password);
+                Console.WriteLine("Account created.");
+                ServerSendData.instance.SendAlertMsg(index, "Account created.");
             }
             else
             {
                 Console.WriteLine("Username already exist.");
+                ServerSendData.instance.SendAlertMsg(index, "Username already exist.");
+
             }
         }
     }

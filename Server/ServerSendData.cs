@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Bindings;
 
 namespace Server
 {
@@ -20,6 +16,15 @@ namespace Server
 
             Client.instance[index].socket.Send(sizeinfo);
             Client.instance[index].socket.Send(data);
+        }
+
+        public void SendAlertMsg(int index, string msg)
+        {
+            PacketBuffer buffer = new PacketBuffer();
+            buffer.WriteInteger((int)ServerPackets.SAlertMsg);
+            buffer.WriteString(msg);
+            SendDataTo(index, buffer.ToArray());
+            buffer.Dispose();
         }
     }
 }
