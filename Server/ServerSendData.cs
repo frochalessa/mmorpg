@@ -26,5 +26,14 @@ namespace Server
             SendDataTo(index, buffer.ToArray());
             buffer.Dispose();
         }
+
+        public void SendLoginOk(int index)
+        {
+            PacketBuffer buffer = new PacketBuffer();
+            buffer.WriteInteger((int)ServerPackets.SLoginOk);
+            buffer.WriteInteger(index);
+            SendDataTo(index, buffer.ToArray());
+            buffer.Dispose();
+        }
     }
 }

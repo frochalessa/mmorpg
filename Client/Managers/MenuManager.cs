@@ -10,7 +10,7 @@ namespace Client
         {
             Login,
             Register,
-            InGame
+            Teste
         }
 
         public static void ChangeMenu(Menu menu)

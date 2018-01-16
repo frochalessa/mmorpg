@@ -11,10 +11,14 @@ namespace Client
     /// </summary>
     public class Game1 : Game
     {
+        public static Game1 Instance = new Game1();
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
         Gui gui = new Gui();
+
+        public GameScreenManager GameScreenManager { get; private set; }
 
         public Game1()
         {
@@ -22,6 +26,7 @@ namespace Client
             Content.RootDirectory = "Content";
             graphics.PreferredBackBufferHeight = 768;
             graphics.PreferredBackBufferWidth = 1024;
+            GameScreenManager = new GameScreenManager();
         }
 
         /// <summary>
@@ -37,8 +42,11 @@ namespace Client
             ClientTcp.instance.Connect();
             Console.WriteLine("You are now connected to the server!");
             UserInterface.Initialize(Content, BuiltinThemes.hd);
-            gui.Start();
-            MenuManager.ChangeMenu(MenuManager.Menu.Login);
+            
+            //gui.Start();
+            //MenuManager.ChangeMenu(MenuManager.Menu.Login);
+
+            GameScreenManager.Push(new LoginScreen());
 
             base.Initialize();
         }
@@ -75,7 +83,9 @@ namespace Client
                 Exit();
 
             // TODO: Add your update logic here
-            UserInterface.Active.Update(gameTime);
+           UserInterface.Active.Update(gameTime);
+
+            GameScreenManager.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -90,6 +100,8 @@ namespace Client
 
             // TODO: Add your drawing code here
             UserInterface.Active.Draw(spriteBatch);
+
+            GameScreenManager.Draw(spriteBatch);
 
             base.Draw(gameTime);
         }

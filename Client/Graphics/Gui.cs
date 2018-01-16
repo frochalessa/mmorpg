@@ -14,11 +14,24 @@ namespace Client
         {
             CreateWindow_Login();
             CreateWindow_Register();
+            CreateWindow_Teste();
         }
 
         public void CreateWindow(Panel panel)
         {
             Windows.Add(panel);
+        }
+
+        public void CreateWindow_Teste()
+        { 
+            //create entity's
+            Panel panel = new Panel(new Vector2(400, 250), skin: PanelSkin.Default, anchor: Anchor.TopLeft, offset: new Vector2(10, 10));
+            Icon icon = new Icon(IconType.Heart);
+            panel.AddChild(icon);
+            //panel.Scale = 0.7f;
+            UserInterface.Active.AddEntity(panel);
+            //create the window
+            CreateWindow(panel);
         }
 
         public void CreateWindow_Login()

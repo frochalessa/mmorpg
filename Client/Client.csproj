@@ -43,6 +43,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Graphics\Gui.cs" />
+    <Compile Include="Graphics\Screens\LoginScreen.cs" />
+    <Compile Include="Managers\GameScreenManager\GameScreen.cs" />
+    <Compile Include="Managers\GameScreenManager\GameScreenManager.cs" />
     <Compile Include="Managers\MenuManager.cs" />
     <Compile Include="Network\ClientHandleData.cs" />
     <Compile Include="Network\ClientSendData.cs" />

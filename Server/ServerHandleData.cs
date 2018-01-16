@@ -57,6 +57,7 @@ namespace Server
                 return;
             }
             Console.WriteLine("Player logged in succesfully.");
+            ServerSendData.instance.SendLoginOk(index);
             Database.instance.LoadPlayer(index, username);
         }
 

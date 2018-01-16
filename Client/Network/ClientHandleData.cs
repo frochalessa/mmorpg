@@ -18,7 +18,7 @@ namespace Client
             {
                 //Add your packets in here, so the client knows which methode to execute.
                 { (int)ServerPackets.SAlertMsg, HandleAlertMsg },
-                //{ (int)ServerPackets.SLoginOk, HandleLoginOk },
+                { (int)ServerPackets.SLoginOk, HandleLoginOk },
                 //{(int)ServerPackets.SPlayerData, HandlePlayerData },
 
             };
@@ -50,6 +50,17 @@ namespace Client
 
             Debug.WriteLine(msg);
             buffer.Dispose();
+        }
+
+        public void HandleLoginOk(byte[] data)
+        {
+            PacketBuffer buffer = new PacketBuffer();
+            buffer.WriteBytes(data);
+            buffer.ReadInteger();
+            int index = buffer.ReadInteger();
+            buffer.Dispose();
+
+            MenuManager.ChangeMenu(MenuManager.Menu.Teste);
         }
     }
 }

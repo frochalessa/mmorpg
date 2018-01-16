@@ -5,6 +5,7 @@
     public enum ServerPackets
     {
         SAlertMsg = 1,
+        SLoginOk
     }
     //get send from client to server
     //server has to listen to clientpackets
